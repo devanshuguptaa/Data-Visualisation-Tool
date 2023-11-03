@@ -85,8 +85,7 @@ def visualize():
             return redirect("/Uploader")
         else:
             return render_template("Visualization.html")
-    else:
-       abort(401)
+
 @home_api.route("/Uploader",methods=["GET","POST"])
 def uploader():
     if "id" in session:
@@ -97,9 +96,6 @@ def uploader():
     else:
         return redirect("/login")
 
-@home_api.errorhandler(401)
-def custom_401(error):
-    return Response('<Why access is denied string goes here...>', 401, {'WWW-Authenticate':'Basic realm="Login Required"'})
 
 
 
