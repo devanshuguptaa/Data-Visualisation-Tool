@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>About Form</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    form {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  fieldset {
+    padding: 20px;
+  }
+  
+  legend {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  </style>
+</head>
+<body>
+  <form action="#">
+    <fieldset>
+      <legend>About Me</legend>
+
+      <label for="name">Name</label>
+      <input type="text" name="name" placeholder="Your name">
+
+      <label for="email">Email</label>
+      <input type="email" name="email" placeholder="Your email">
+
+      <label for="bio">Bio</label>
+      <textarea name="bio" placeholder="Tell us about yourself"></textarea>
+
+      <button type="submit">Submit</button>
+    </fieldset>
+  </form>
+</body>
+</html>
