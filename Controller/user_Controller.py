@@ -23,7 +23,7 @@ def Signup():
         Password = request.form["Password"]
         check = obj_model.check_user_exists(Email,Password)
         if len(check)>0:
-            return render_template('/login')
+            return redirect('/login')
         else:
             msg = "You logged in successfully!"
             obj_model.Model_signup(user_name,Email,Password)
