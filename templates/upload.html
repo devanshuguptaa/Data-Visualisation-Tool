@@ -7,6 +7,26 @@
     
 </head>
 <body>
-    <h1> Hi I am in the Upload </h1>
+    <h1> Hi I am in the Upload</h1>
+    <p><strong>Which level would you like? (Select 3 Levels)</strong></p>
+    <form action="" method="post">
+    <div class="pricing-levels-3">
+        <!-- <label for="column_{{i}}"></label>
+        <input class="single-checkbox"type="" name="column_{{i}}" value="">{{l[i]}}<br> -->
+        <label for="column1" aria-hidden="true">column1</label>
+		<input type="text" name="column1" placeholder="column1">
+        <label for="column2" aria-hidden="true">column2</label>
+		<input type="text" name="column2" placeholder="column2">
+     </div>
+    <button>submit</button>
+    </form>  
 </body>
+<script>
+var limit = 2;
+$('input.single-checkbox').on('change', function(evt) {
+   if($(this).siblings(':checked').length >= limit) {
+       this.checked = false;
+   }
+});
+</script>
 </html>

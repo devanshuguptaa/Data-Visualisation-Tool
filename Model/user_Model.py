@@ -1,13 +1,13 @@
 import mysql.connector as connection
 import json
 from flask import jsonify,make_response
+import matplotlib.pyplot as plt
 class Model:
     def __init__(self):
         try:
             self.conn = connection.connect(host="localhost", database="website", user="root", passwd="Example@2023#",
                                         use_pure=True)
             self.curr = self.conn.cursor(dictionary=True)
-            pass
         except:
             print("Some Error")
     def Model_visulaize(self):
@@ -51,6 +51,15 @@ class Model:
         res = self.curr.fetchall()
         print(res)
         return res
+    def get_column(self,df):
+        l = df.columns.values.tolist()
+        return l
+    def visualize(self,df,column1,column2):
+        plt.plot(column1,column2)
+        print(plt.show())
+
+
+
 
 
 

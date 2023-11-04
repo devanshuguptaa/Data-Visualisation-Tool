@@ -19,8 +19,8 @@ def Home():
 def Signup():
     if request.method == 'POST':
         user_name = request.form["Username"]
-        Email = request.form["Email"]
-        Password = request.form["Password"]
+        Email     = request.form["Email"]
+        Password  = request.form["Password"]
         check = obj_model.check_user_exists(Email,Password)
         if len(check)>0:
             return redirect('/login')
@@ -82,7 +82,8 @@ def visualize():
             if file:
                 df = pd.read_csv(file)
                 print(df)
-            return redirect("/Uploader")
+                l = obj_model.get_column(df)
+            return render_template("upload.html",l=l)
         else:
             return render_template("Visualization.html")
 
@@ -90,11 +91,18 @@ def visualize():
 def uploader():
     if "id" in session:
         if request.method == "POST":
-            pass
+            column1 = request.form["column1"]
+            column2 = request.form["column2"]
+            print(column1,column2)
+            obj_model.visualize(column1,column2)
+            return render_template("show_image.html")  
         else:
             return render_template("upload.html")
     else:
         return redirect("/login")
+
+
+
 
 
 
