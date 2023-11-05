@@ -16,6 +16,7 @@
     </div>
     <form action="Visualisation" method="post">    Hi!!!  
         <button>Click</button>
+        
     </form>
     <div>
     <a href="\" style="color:blue">logout</a>
@@ -23,10 +24,15 @@
 
     <br>
     <br>
-    <form method="POST" action="" enctype="multipart/form-data">
+    
+    <form method="post" action="" enctype="multipart/form-data">
+        
         <label for="fileSelect"> Spreadsheet </label>
         <input id="fileSelect" type="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required=""/>
-        <p><input type="submit" value="Submit"></p>
-    </form>
+            <label for="column1">Choose a car:</label>
+            <br>
+            <br>
+            <p><input type="submit" value="Submit"></p>
+        </form>
 </body>
 </html>

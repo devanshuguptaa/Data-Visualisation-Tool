@@ -1,5 +1,6 @@
 from flask import Blueprint,request,jsonify,render_template,url_for,flash,redirect,session
 import os
+from werkzeug.utils import secure_filename
 from Model.user_Model import Model
 import pandas as pd
 home_api = Blueprint('homeapi',__name__)
@@ -12,7 +13,7 @@ def Home():
     if "id" not in session:
         return render_template('HomePage.html')
     else:
-            return render_template("HomePage.html")   
+        return render_template("HomePage.html")   
 
 
 @home_api.route("/signup",methods=["GET","POST"])
@@ -31,6 +32,7 @@ def Signup():
     else:
         return render_template("login.html")
 
+
 @home_api.route("/login",methods=["GET","POST"])
 def Login():
     if request.method == 'POST':
@@ -47,6 +49,7 @@ def Login():
             return redirect('/login')
     else:
         return render_template("login.html")        
+
 
 @home_api.route('/logout')
 def logout():
@@ -79,28 +82,41 @@ def visualize():
     if "id" in session:
         if request.method == "POST":
             file = request.files["file"]
+            my_dict = {'a': 1, 'b': 2} 
+            # print("file: ",file,"session['file']--->",d["file"],d)
             if file:
                 df = pd.read_csv(file)
-                print(df)
                 l = obj_model.get_column(df)
-            return render_template("upload.html",l=l)
+                row = list(df.values)
+                global d 
+                d = {"file":df}
+            return render_template("upload.html",l=l,row=row)
         else:
             return render_template("Visualization.html")
+    else:
+        return redirect("/login")
+            
 
 @home_api.route("/Uploader",methods=["GET","POST"])
 def uploader():
     if "id" in session:
-        if request.method == "POST":
-            column1 = request.form["column1"]
-            column2 = request.form["column2"]
-            print(column1,column2)
-            obj_model.visualize(column1,column2)
-            return render_template("show_image.html")  
-        else:
-            return render_template("upload.html")
+        if request.method == "POST": 
+            col1 = request.form["column1"] 
+            col2 = request.form["column2"]
+            file = d["file"]
+            print(col1,col2)
+            # print(file)
+            img_path = obj_model.show_fig(col1,col2,file)
+            return render_template("show_image.html",col1=col1,col2=col2,img_path = img_path)  
     else:
         return redirect("/login")
 
+@home_api.route("/show_image",methods=["GET","POST"])
+def show_image():
+    if "id" in session:
+            return "<h1>Finally Completed!</h1>"
+    else:
+        return redirect("/login")
 
 
 

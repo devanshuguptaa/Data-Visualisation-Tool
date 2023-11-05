@@ -1,7 +1,23 @@
 import mysql.connector as connection
 import json
+import os
 from flask import jsonify,make_response
 import matplotlib.pyplot as plt
+import random
+import pandas as pd
+
+class Plot:
+    def __init__(self,df,column1,column2):
+        self.df = df
+        self.column1 = column1
+        self.column2 = column2
+    
+    def scatterPlot():
+        pass
+
+    def plot():
+        pass     
+
 class Model:
     def __init__(self):
         try:
@@ -10,22 +26,6 @@ class Model:
             self.curr = self.conn.cursor(dictionary=True)
         except:
             print("Some Error")
-    def Model_visulaize(self):
-        fig = plt.figure()
-
-        # Add a plot to the figure
-        plt.plot([1, 2, 3, 4, 5])
-
-        # Save the figure as a PNG image
-        fig.savefig('my_image.png')
-
-        import os.path
-        directory = 'D:\Start Project Website with Login and Registration\Start Project Website with Login and Registration\backend\templates'
-        filename = "my_image.png"
-        file_path = os.path.join(directory, filename)
-        with open(file_path,"r") as f:
-            print(f.read())
-        return 1
 
     def Model_signup(self,user_name,Email,Password):
         self.curr.execute("create table if not exists Register(id int primary key auto_increment,Username varchar(255),Email varchar(255),Password varchar(255) );")
@@ -52,11 +52,60 @@ class Model:
         print(res)
         return res
     def get_column(self,df):
-        l = df.columns.values.tolist()
+        l=[]
+        for i in df.columns.values.tolist():
+            if df[i].dtype.kind in 'biufc':
+                l = df.columns.values.tolist()
         return l
-    def visualize(self,df,column1,column2):
-        plt.plot(column1,column2)
-        print(plt.show())
+
+
+
+
+
+
+    def show_fig(self,column1,column2,df):
+        fig, ax = plt.subplots()
+        ax.plot(column1, column2,data=df)
+        tittle = "{} v/s {}".format(column1,column2)
+        plt.title(tittle)
+        n = random.randint(1,1000000)
+        image_name = "image" + "{}".format(n) + ".png" 
+        image_path = "static\images"+"\_"+image_name
+        fig.savefig(image_path)
+        print(image_path)
+        return image_path
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+    # def pieplot(column1,column2,df):
+    #     pyplot.pie(slice,
+    #     labels =column1,
+    #     colors =column2,
+    #     startangle = 90,
+    #     shadow = True,
+    #     explode =(0,0.1,0,0,0),
+    #     autopct ='%1.1f%%')
+    #     pyplot.title('Training Subjects')
+        
+        
+    
 
 
 

@@ -4,29 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <style>
+      .myTable { 
+        width: 100%;
+        text-align: left;
+        background-color: lemonchiffon;
+        border-collapse: collapse; 
+        }
+      .myTable th { 
+        background-color: goldenrod;
+        color: white; 
+        }
+      .myTable td, 
+      .myTable th { 
+        padding: 10px;
+        border: 1px solid goldenrod; 
+        }
+      </style>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <h1> Hi I am in the Upload</h1>
-    <p><strong>Which level would you like? (Select 3 Levels)</strong></p>
-    <form action="" method="post">
-    <div class="pricing-levels-3">
-        <!-- <label for="column_{{i}}"></label>
-        <input class="single-checkbox"type="" name="column_{{i}}" value="">{{l[i]}}<br> -->
-        <label for="column1" aria-hidden="true">column1</label>
-		<input type="text" name="column1" placeholder="column1">
-        <label for="column2" aria-hidden="true">column2</label>
-		<input type="text" name="column2" placeholder="column2">
-     </div>
-    <button>submit</button>
-    </form>  
+         <h1>Lis t of columns {{l}}</h1>
+    <form action="/Uploader" method="post">
+      
+      
+      </head>
+      <body>
+      
+      <!-- TABLE -->
+      <table class="myTable">
+        <tr>
+          {% for i in l %}
+          <th>{{i}}</th>
+          {% endfor %}
+        </tr>
+        
+           <div>
+              {% for eachrow in row %}
+                <tr>
+                  {% for j in range(0,l|length) %}
+                     <td>{{ eachrow[j] }}</td>
+                 {% endfor %}  
+                </tr> 
+                {% endfor %} 
+          </div>
+          
+        
+      </table>
+
+      <br>
+      <br>
+      <select name="column1" class="form-select form-select-sm" aria-label="Small select example">
+      <option selected>column1</option>
+        {% for i in l %}
+          <option    value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+
+      <br>
+      <br>
+
+      <select name="column2" class="form-select form-select-sm" aria-label="Small select example">
+        <option selected>column2</option>
+          {% for i in l %}
+            <option   value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+        
+      <br>
+      <br>
+      <input type="submit">
+    </form>
+
+      
 </body>
-<script>
+<!-- <script>
 var limit = 2;
 $('input.single-checkbox').on('change', function(evt) {
    if($(this).siblings(':checked').length >= limit) {
        this.checked = false;
    }
 });
-</script>
+</script> -->
 </html>
